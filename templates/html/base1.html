@@ -1,0 +1,35 @@
+{% extends 'html/base.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+</head>
+{% block base1 %}
+<body>
+        <div class="container-fluid">
+                <p>
+                <div>
+                        <img src="/media/{{ colg_data.college_image }}" style="width: 255px; height: 150px;" class="card-img-top" alt="..."><br><br>
+                        
+                        {{colg_data.college_name}}<br>
+                        {{colg_data.college_address}}<br>
+
+                        {% for colg_cors in colg_id %}
+                        {{ colg_cors.course}}
+                        {{colg_cors.course.branch}}<br>
+                        {{colg_cors.course.stream}}<br>
+                        {{colg_cors.fee}}<br>
+                        {% endfor %}
+                        
+                </div>
+
+                </p>
+        </div>
+</body>
+{% endblock base1 %}
+
+</html>

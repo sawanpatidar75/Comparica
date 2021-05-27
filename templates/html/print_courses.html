@@ -1,0 +1,26 @@
+{% extends 'html/cors_colg.html' %}
+{% load static %}
+    
+{% block print_c %}
+        <div >
+            {% for data in colg_data %}
+                <div class="card mb-3" style="max-width: 540px;">
+                    <div class="row g-0">
+                      <div class="col-md-4">
+                        <img src="/media/{{ data.college.college_image }}" alt="College Image" style="width: 190px;height: 200px;">
+                      </div>
+                      <div class="col-md-8">
+                        <div class="card-body">
+                          <h5 class="card-title">{{data.college.college_name}}</h5>
+                          <p class="card-text">{{data.college.college_address}}</p>
+                          
+                          <p class="card-text">{{data.course.course_name}}</p>
+                          <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+            {% endfor %}
+        </div>
+
+{% endblock print_c %}

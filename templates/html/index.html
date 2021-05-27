@@ -1,0 +1,94 @@
+{% extends 'html/base.html' %}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        .card-size{
+            width: 500px;
+            height: 100px;
+        }
+        div.crousel-item{
+            width: 90%;
+            height: 50%px;
+        }
+    </style>
+</head>
+<body>
+    
+{% block index %}
+
+
+<section class='container-fluid m-auto '>
+    <div class="" >
+        <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+              <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+              <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+              <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            </div>
+            <div class="carousel-inner container-fluid bg-warning p-2">
+              <div class="carousel-item active" style="max-width: 73rem;height: 22rem;">
+                <img src="{% static 'images/medicaps.jpeg'%}" style='height: 350px;' class="d-block w-100 crousel-size" alt="...">
+                <div><p class="card-text  text-center" style="font-size: 20px;" >This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                </div></div>
+              <div class="carousel-item" style="max-width: 73rem;height: 20rem;">
+                <img src="{% static 'images/acropolice.jpeg'%}" style='height: 350px;' class="d-block w-100 crousel-size" alt="...">
+              </div>
+              <div class="carousel-item" style="max-width: 73rem;height: 20rem;">
+                <img src="{% static 'images/ips.jpeg'%}" style='height: 350px;' class="d-block w-100 crousel-size" alt="...">
+              </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"  data-bs-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"  data-bs-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    
+    
+        <div class="container-fluid">
+
+          <div class=" row row-cols-1 row-cols-md-4 g-2">
+            {% for data in c_data %}
+
+            <div class="card ">
+              <img src="/media/{{ data.college_image }}" style="width: 255px; height: 150px;" class="card-img-top" alt="...">
+              <div class="card-body">
+                
+                <a href="{% url 'Colgid' data.id %}">{{data.college_name}}</a>
+                
+                
+                
+              </div>
+              <div class="card-footer">
+                <small class="text-muted">Last updated 3 mins ago</small>
+              </div>
+            </div>
+
+            {% endfor %}
+            {% for cors_data in colg_id %}
+            <p class="card-text">{{ cors_data.course}}<br></p>
+            {% endfor %}
+            
+          </div>
+        </div>    
+        
+    </div>
+    
+</section>
+
+
+{% endblock index %}
+
+</body>
+</html>

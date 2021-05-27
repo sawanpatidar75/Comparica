@@ -1,0 +1,32 @@
+{% extends 'html/base.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+{% block colg_cors %}
+
+<body>
+
+    <section class="container-fluid row">
+        <div class='container col-3' style="padding: 10px 30px; height: 500px; box-shadow: lightblue; border-radius: 1px; background:linear-gradient(to top right, #fa5dbe, #ffa66a,#ff7070,#ad4125)">
+            {% block courses %}
+            {% endblock courses %}
+
+        </div>
+        <div class='container col-9' >
+          
+            {% block print_c %}
+
+            {% endblock print_c %}
+
+          </div>
+    </section>
+    
+</body>
+{% endblock colg_cors %}
+</html>

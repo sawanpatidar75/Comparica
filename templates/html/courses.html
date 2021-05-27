@@ -1,0 +1,46 @@
+{% extends 'html/cors_colg.html' %}
+{% load static %}
+{% block courses %}
+
+<body>
+  <section style="display: block;position: fixed;">
+    <div class="container-fluid "style="display: inline-block;">
+      {% for print_course in course_data %}
+
+              <li class="mx-3 my-2" >
+                <a href="{% url 'course_college' print_course.id %}" style="color: rgb(rgb(62, 207, 252), rgb(13, 223, 13), rgb(231, 23, 68));" ><b> {{print_course}}</b> </a><br>
+              </li>
+                {% endfor %}
+
+
+    </div>
+  </section>
+</body>
+
+
+<!-- 
+<body>
+    <section class="container-fluid row">
+          <div class='container col-3' style="padding: 10px 30px; height: 500px; box-shadow: lightblue; border-radius: 1px; background:linear-gradient(to top right, #fa5dbe, #ffa66a,#ff7070,#ad4125)">
+            <p >
+                
+                {% for print_course in course_data %}
+
+              <li class="mx-3 my-2" >
+                <a href="{% url 'course_college' print_course.id %}" style="color: rgb(rgb(62, 207, 252), rgb(13, 223, 13), rgb(231, 23, 68));" ><b> {{print_course}}</b> </a><br>
+              </li>
+                {% endfor %}
+            </p>
+          </div>
+          <div class='container col-9' style="display: block;" >
+          
+            {% block print_c %}
+
+            {% endblock print_c %}
+
+          </div>
+
+    </section>
+    </body> -->
+
+{% endblock courses %}

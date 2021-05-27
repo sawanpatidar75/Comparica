@@ -1,0 +1,164 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.6.0/dist/umd/popper.min.js" integrity="sha384-KsvD1yqQ1/1+IA7gi3P0tyJcT3vR+NdBTt13hSJ2lnve8agRGXTTyNaBYmCR/Nwi" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.min.js" integrity="sha384-nsg8ua9HAw1y0W1btsyWgBklPnCUAFLuTMS2G72MMONqmOymq585AcH49TLBQObG" crossorigin="anonymous"></script> -->
+
+    <title>COMPARICA</title>
+    <style>
+    .logo{
+        width: 220px;
+        height: 100px;
+        margin-left: 0px;
+    }
+    .page-name{
+        font-size: 70px;
+        font-family: Comic Sans MS, Comic Sans, cursive;
+        color: deeppink;
+
+    }
+    nav.head{
+        padding: 2px;
+        background-color:#a2b9bc;
+    }
+    #comp-name{
+      width: 500px;
+      height: 110px;
+    }
+    .crousel-size{
+      height: 500px;
+    }
+    .margin-nav{
+      margin-top: 113px;
+    }
+    .dropmain .treview{
+      position: relative;
+      float: left;
+    }
+    .dropmain .treview:hover .dropitem{
+      display: block;
+    }
+
+    
+    
+    </style>
+</head>
+<body>
+
+    <section class='row container-fluid m-auto p-0 '>
+        <div class='fixed-top'>
+            <header class="navbar-header">
+                <nav class="navbar navbar-expand-lg navbar-light head ">
+
+                    <div class="container-fluid ">
+                      <div class="collapse navbar-collapse" id="navbarSupportedContent row">
+                                {% load static %}
+                            <img src="{% static 'images/large.png' %}" class="nevbar-brand mr-10 logo"  alt="web_logo">
+                            <h1 class="col-1"></h1>
+                            <img src="{% static 'images/comp_nam.png' %}" class="nevbar-brand mx-0" id="comp-name" alt="web_logo">
+                            <!-- <a class="nav-link active page-name col-5" aria-current="page" href="#">COMPARICA</a> -->
+                            <div class=" m-auto">
+                              <ul class="nav navbar-nav navbar-right m-auto">
+                                <li><a href="#"><span class="glyphicon glyphicon-user m-auto sign"></span> Sign Up</a></li>
+                                <li><a href="#"><span class="glyphicon glyphicon-log-in mx-2"></span> Login</a></li>
+                                <li><a href="#"><span class="glyphicon glyphicon-log-out mx-2"></span> LogOut</a></li>
+                              </ul>
+                            </div>
+                            </div>
+                            
+                      </div>
+                </nav>
+            </header>
+          </div>
+
+
+            <div class='fixed-top margin-nav'>
+                <nav class="navbar navbar-expand-lg navbar-light bg-secondary">
+                  {% block sidenav %}
+
+                  {% include 'html/sidenav.html' %}
+                  {% endblock sidenav %}
+                    
+                    <div class="container-fluid">
+                      <a class="navbar-brand" href="#">COMPARICA</a>
+                      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                      </button>
+                      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                          <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="/">Home</a>
+                          </li>
+                          <li class="nav-item">
+                            <a class="nav-link active" href="{% url 'coll' %}">colleges</a>
+                          </li>
+                          <li class="nav-item dropdown">
+                            <a class="nav-link active dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                              Courses </a>
+                            <ul class="dropdown-menu" role="menu" aria-labelledby="navbarDropdown">
+                              {% for data in drop_data %}
+                              <li class="nav-item dropdown-submenu">
+                                
+                                <a class="dropdown-item" tabindex="-1" href="{% url 'show_courses' data.id %}">{{ data }}</a>
+                                
+                              </li>
+                              {% endfor %}
+                                
+                              
+                            </ul>
+                          </li>
+                          <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="{% url 'compare' %}">Compare</a>
+                          </li>
+                          
+                          
+
+
+
+                          
+                          
+                          
+                        </ul>
+                        <form class="d-flex">
+                          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                          <button class="btn btn-outline-success" type="submit">Search</button>
+                        </form>
+                      </div>
+                    </div>
+                  </nav>
+            </div>
+            <div style="margin-top: 180px;" class="p-0">
+
+
+        {% block index %}
+            
+        {% endblock index %}
+        {% block base1 %}
+            
+        {% endblock base1 %}
+
+        {% block college %}
+
+        {% endblock college %}
+
+        {% block colg_cors %} {% endblock colg_cors %}
+
+          </div>
+          
+
+    </section>
+    <div>
+
+    </div>
+
+    
+</body>
+</html>
