@@ -12,7 +12,13 @@ urlpatterns = [
     path('Colgid/<int:pid>',views.CollegeId,name='Colgid'),
     path('show_courses/<int:show_id>',views.Show_Courses,name='show_courses'),
     path('course_college/<int:cors_id>',views.print_course_college,name='course_college'),
-    path('compare',views.Compare,name='compare'),
+    path('compare_colg/<int:comp_id>',views.Compare,name='compare_colg'),
+    path('search-colg',views.Search_Colg,name='search-colg'),
+    path('login',views.LogIn,name='login'),
+    path('signup',views.SignUp,name='signup'),
+    path('logout',views.LogOut,name='logout'),
+    path('logedin',views.LogedIn,name='logedin'),
+
 
 
     # path('Dropdown_Course',views.course_detail,name='Dropdown_Cors'),

@@ -67,9 +67,13 @@
                             <!-- <a class="nav-link active page-name col-5" aria-current="page" href="#">COMPARICA</a> -->
                             <div class=" m-auto">
                               <ul class="nav navbar-nav navbar-right m-auto">
-                                <li><a href="#"><span class="glyphicon glyphicon-user m-auto sign"></span> Sign Up</a></li>
-                                <li><a href="#"><span class="glyphicon glyphicon-log-in mx-2"></span> Login</a></li>
-                                <li><a href="#"><span class="glyphicon glyphicon-log-out mx-2"></span> LogOut</a></li>
+                              {% if user.is_authenticated %}
+                                <li><p> Welcome {{request.user}}</p></li>
+                                <li><a href= {% url 'logout' %}><span class="glyphicon glyphicon-log-out mx-2"></span> LogOut</a></li>
+                              {% else %}
+                                <li><a href= {% url 'signup' %} ><span class="glyphicon glyphicon-user m-auto sign"></span> Sign Up</a></li>
+                                <li><a href= {% url 'login' %} ><span class="glyphicon glyphicon-log-in mx-2"></span> Login</a></li>
+                              {% endif %}
                               </ul>
                             </div>
                             </div>
@@ -116,7 +120,7 @@
                             </ul>
                           </li>
                           <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="{% url 'compare' %}">Compare</a>
+                            <a class="nav-link active" aria-current="page" href="#">Compare</a>
                           </li>
                           
                           
@@ -150,6 +154,10 @@
         {% endblock college %}
 
         {% block colg_cors %} {% endblock colg_cors %}
+
+        {% block loged_in %}
+        {% endblock loged_in %}
+
 
           </div>
           
