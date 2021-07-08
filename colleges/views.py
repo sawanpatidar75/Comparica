@@ -2,7 +2,7 @@ from django.shortcuts import redirect, render
 from django.http import HttpResponse
 from .models import *
 from django.contrib.auth.forms import UserCreationForm
-from .forms import CreateUserForm
+from .forms import *
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
@@ -18,7 +18,7 @@ def index(request):
 
 def LogIn(request):
     if request.user.is_authenticated:
-        return redirect('logedin')
+        return redirect('x_admin')
     else:
         if request.method == 'POST':
             username = request.POST.get("username")
@@ -28,7 +28,7 @@ def LogIn(request):
 
             if user is not None:
                 login(request, user)
-                return redirect('logedin')
+                return render(request,'html/admin.html')
             else:
                 messages.info(request, 'Username or Password is incorrect.')
                 return redirect('login')
@@ -37,7 +37,7 @@ def LogIn(request):
 
 def SignUp(request):
     if request.user.is_authenticated:
-        return redirect('logedin')
+        return redirect('x_admin')
     else:
         form = CreateUserForm()
         if request.method == 'POST':
@@ -60,23 +60,19 @@ def LogedIn(request):
     context = {}
     return render(request,'html/userlogin.html',context)
 
-@login_required(login_url='login')
 def colleges(request):
     college =Colleges_Model.objects.all()
     return render(request,'html/college.html',{'colleges':college})
 
-@login_required(login_url='login')
 def college_detail(request,pid):
     data = College_Details.objects.get(id=pid)
     return render(request,'html/base1.html',{'colg_data': data})
 
 
-@login_required(login_url='login')
 def college_data(request):
     Colg_data = Colleges_Model.objects.all()
     return render(request, 'html/Colgdata.html',{'colg_data':Colg_data})
 
-@login_required(login_url='login')
 def CollegeId(request,pid):
     data = Colleges_Model.objects.get(id=pid)
     Colg_id = College_Details.objects.filter(college_id=pid)
@@ -87,7 +83,6 @@ def course_detail(request):
     degree_data = Degree_Model.objects.all()
     return {'drop_data':degree_data}
 
-@login_required(login_url='login')
 def Show_Courses(request,show_id):
     corse_var = Course_Model.objects.filter(degree_id=show_id)
     return render(request, 'html/courses.html',{'course_data':corse_var })
@@ -97,13 +92,11 @@ def print_course_college(request,cors_id):
     p_data = College_Details.objects.filter(course_id=cors_id)
     return render(request,'html/print_courses.html',{'colg_data':p_data})
 
-@login_required(login_url='login')
 def Compare(request,comp_id):
     comp_data = Colleges_Model.objects.get(id=comp_id)
     Comp_Colg_id = College_Details.objects.filter(college_id=comp_id)
     return render(request, 'html/compare.html',{'colg_id':Comp_Colg_id,'colg_data': comp_data})
 
-@login_required(login_url='login')
 def Search_Colg(request):
     if request.method == 'POST':
         searched = request.POST['searched']
@@ -113,9 +106,126 @@ def Search_Colg(request):
     else:
         return render(request, 'html/base1.html',{})
 
+@login_required(login_url='login')
+def X_Admin(request):
+    return render(request,'html/admin.html')
+@login_required(login_url='login')
+def College_Form(request):
+    form = College_Model_Form()
+    if request.method == 'POST':
+        form = College_Model_Form(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('college_form')
+    else:
+        form = College_Model_Form()
+    context = {"form" : form}
+    return render(request, 'html/college_form.html',context)
+
+@login_required(login_url='login')
+def Degree_Form(request):
+    degree_form = Degree_Model_Form()
+    if request.method == 'POST':
+        degree_form = Degree_Model_Form(request.POST)
+        if degree_form.is_valid():
+            degree_form.save()
+            return redirect('degree_form')
+    else:
+        degree_form = Degree_Model_Form()
+    context = {"degree_form" : degree_form}
+    return render(request, 'html/college_form.html',context)
+
+@login_required(login_url='login')
+def Stream_Form(request):
+    stream_form = Stream_Model_Form()
+    if request.method == 'POST':
+        stream_form = Stream_Model_Form(request.POST, request.FILES)
+        if stream_form.is_valid():
+            stream_form.save()
+            return redirect('stream_form')
+    else:
+        stream_form = Stream_Model_Form()
+    context = {"stream_form" : stream_form}
+    return render(request, 'html/college_form.html',context)
+
+@login_required(login_url='login')
+def Branch_Form(request):
+    branch_form = Branch_Model_Form()
+    if request.method == 'POST':
+        branch_form = Branch_Model_Form(request.POST, request.FILES)
+        if branch_form.is_valid():
+            branch_form.save()
+            return redirect('branch_form')
+    else:
+        branch_form = Branch_Model_Form()
+    context = {"branch_form" : branch_form}
+    return render(request, 'html/college_form.html',context)
+
+@login_required(login_url='login')
+def Course_Form(request):
+    course_form = Course_Model_Form()
+    if request.method == 'POST':
+        course_form = Course_Model_Form(request.POST, request.FILES)
+        if course_form.is_valid():
+            course_form.save()
+            return redirect('course_form')
+    else:
+        course_form = Course_Model_Form()
+    context = {"course_form" : course_form}
+    return render(request, 'html/college_form.html',context)
+
+@login_required(login_url='login')
+def College_Details_Form(request):
+    form = College_Details_Model_Form()
+    if request.method == 'POST':
+        college_detail_form = College_Details_Model_Form(request.POST, request.FILES)
+        if college_detail_form.is_valid():
+            college_detail_form.save()
+            return redirect('college_details_form')
+    else:
+        college_detail_form = College_Details_Model_Form()
+    context = {"college_detail_form" : college_detail_form}
+    return render(request, 'html/college_form.html',context)
 
 
 
 
 
 
+# def College_Form(request):
+#     if request.method == 'POST':
+#         # if College_Model_Form:        
+#         colg_form = College_Model_Form(request.POST or None, request.FILES or None)
+#         # elif Degree_Model_Form:        
+#         degree_form = Degree_Model_Form(request.POST or None,request.FILES or None)
+#         # elif Stream_Model_Form:        
+#         stream_form = Stream_Model_Form(request.POST or None,request.FILES or None)
+#         # elif Branch_Model_Form:        
+#         branch_form = Branch_Model_Form(request.POST or None,request.FILES or None)
+#         # elif Course_Model_Form:        
+#         cors_form = Course_Model_Form(request.POST or None,request.FILES or None)
+#         # elif College_Details_Form:        
+#         colg_dtl_form = College_Details_Form(request.POST or None,request.FILES or None)
+
+#         if colg_form.is_valid():
+#             colg_form.save()
+#         elif degree_form.is_valid():
+#             degree_form.save()
+#         elif stream_form.is_valid():
+#             stream_form.save()
+#         elif branch_form.is_valid():
+#             branch_form.save()
+#         elif cors_form.is_valid():
+#             cors_form.save()
+#         elif colg_dtl_form.is_valid():
+#             colg_dtl_form.save()
+#             return redirect('college_form')
+#     else:
+#         colg_form = College_Model_Form()
+#         degree_form = Degree_Model_Form()
+#         stream_form = Stream_Model_Form()
+#         branch_form = Branch_Model_Form()
+#         cors_form = Course_Model_Form()
+#         colg_dtl_form = College_Details_Form()
+#     context = {"colg_form" : colg_form,"degree_form" : degree_form,"stream_form" : stream_form,"branch_form" : branch_form,"colg_dtl_form" : colg_dtl_form,"cors_form":cors_form}
+#     return render(request, 'html/college_form.html',context)

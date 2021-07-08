@@ -19,6 +19,15 @@ urlpatterns = [
     path('logout',views.LogOut,name='logout'),
     path('logedin',views.LogedIn,name='logedin'),
 
+    path('x_admin',views.X_Admin,name='x_admin'),
+    path('college_form',views.College_Form,name='college_form'),
+    path('degree_form',views.Degree_Form,name='degree_form'),
+    path('stream_form',views.Stream_Form,name='stream_form'),
+    path('branch_form',views.Branch_Form,name='branch_form'),
+    path('course_form',views.Course_Form,name='course_form'),
+    path('college_details_form',views.College_Details_Form,name='college_details_form'),
+
+
 
 
     # path('Dropdown_Course',views.course_detail,name='Dropdown_Cors'),

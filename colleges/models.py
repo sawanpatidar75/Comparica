@@ -1,4 +1,5 @@
 from django.db import models
+from django.conf import settings
 
 # Create your models here.
 
@@ -34,6 +35,7 @@ class Course_Model(models.Model):
     branch = models.ForeignKey(Branch_Model, on_delete=models.CASCADE)
     def __str__(self):
         return self.course_name
+
     
 
 class College_Details(models.Model):
@@ -42,6 +44,11 @@ class College_Details(models.Model):
     fee = models.IntegerField()
     def __str__(self):
         return self.college.college_name
+
+    class Meta:
+        unique_together = ('college', 'course',)
+
+
 
     
 

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>College Details</title>
+</head>
+<body>
+
+<div class=" m-auto">
+        <ul class="nav navbar-nav navbar-right m-auto">
+        {% if user.is_authenticated %}
+            <li><p> Welcome {{request.user}}</p></li>
+            <li><a href= {% url 'logout' %}><span class="glyphicon glyphicon-log-out mx-2"></span> LogOut</a></li>
+        {% else %}
+            <li><a href= {% url 'signup' %} ><span class="glyphicon glyphicon-user m-auto sign"></span> Sign Up</a></li>
+            <li><a href= {% url 'login' %} ><span class="glyphicon glyphicon-log-in mx-2"></span> Login</a></li>
+        {% endif %}
+        </ul>
+        <ul>
+          <li><a href= {% url 'x_admin' %}> Back</a> </li>
+        </ul>
+        </div>
+    <div class="container">
+    {% if form %}
+        <form method="POST" action="" enctype="multipart/form-data">
+          {% csrf_token %}
+          <fieldset>
+            <legend>Form</legend>
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </fieldset>
+        </form>
+      {% elif degree_form %}
+        <form method="POST" action="" >
+          {% csrf_token %}
+          <fieldset>
+            <legend>Form</legend>
+            {{ degree_form.as_p }}
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </fieldset>
+        </form>
+
+      {% elif stream_form %}
+
+        <form method="POST" action="" enctype="multipart/form-data">
+          {% csrf_token %}
+          <fieldset>
+            <legend>Form</legend>
+            {{ stream_form.as_p }}
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </fieldset>
+        </form>
+
+      {% elif branch_form %}
+
+        <form method="POST" action="" enctype="multipart/form-data">
+          {% csrf_token %}
+          <fieldset>
+            <legend>Form</legend>
+            {{ branch_form.as_p }}
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </fieldset>
+        </form>
+
+      {% elif course_form %}
+
+        <form method="POST" action="" enctype="multipart/form-data">
+          {% csrf_token %}
+          <fieldset>
+            <legend>Form</legend>
+            {{ course_form.as_p }}
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </fieldset>
+        </form>
+
+      {% else %}
+
+        <form method="POST" action="" enctype="multipart/form-data">
+          {% csrf_token %}
+          <fieldset>
+            <legend>Form</legend>
+            {{ college_detail_form.as_p }}
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </fieldset>
+        </form>
+        {% endif %}
+    </div>
+</body>
+</html>
