@@ -10,9 +10,9 @@
 </head>
 {% block base1 %}
 <body>
-        <div class="container-fluid row">
+        <div class="container-fluid ">
                 
-                <div class="col-6" style="background-color: lightblue; border-style: solid;">
+                <div class="container-fluid" style="background-color: lightblue; border-style: solid;">
                         <img src="/media/{{ colg_data.college_image }}" style="width: 255px; height: 150px;" class="card-img-top" alt="..."><br><br>
                         
                         {{colg_data.college_name}}<br>
@@ -28,7 +28,7 @@
                 </div>
                 
 
-                <div class="col-6" style="background-color: lightblue;border-style: solid;">
+                {% comment %} <div class="col-6" style="background-color: lightblue;border-style: solid;">
 
                         <form class="d-flex mt-2" method="POST" action="{% url 'search-colg' %}" style="float: right;">
                                 {% csrf_token %}
@@ -62,9 +62,11 @@
                                 {{comp_colg_cors.course.stream}}<br>
                                 {{comp_colg_cors.fee}}<br>
                                 {% endfor %} -->
-                                <div>
-                                {% block compare %}
-                                {% endblock compare %}
+                                <div> {% endcomment %}
+                                {% comment %} {% block compare %}
+                                {% include 'html/compare.html' %}
+
+                                {% endblock compare %} {% endcomment %}
 </div>
                                 
 

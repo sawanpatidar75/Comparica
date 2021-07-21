@@ -1,4 +1,4 @@
-{% extends 'html/base1.html' %}
+{% comment %} {% extends 'html/base1.html' %} {% endcomment %}
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
@@ -10,7 +10,8 @@
 </head>
 <body>
 
-{% block compare %}
+{% comment %} {% block compare %} {% endcomment %}
+<div class="container-fluid">
 
             <div class="" style="background-color: lightblue; border-style: solid;">
                         <img src="/media/{{ colg_data.college_image }}" style="width: 255px; height: 150px;" class="card-img-top" alt="..."><br><br>
@@ -26,6 +27,48 @@
                         {% endfor %}
                         
                 </div>
+
+                <div class="col-6" style="background-color: lightblue;border-style: solid;">
+
+                        <form class="d-flex mt-2" method="POST" action="{% url 'search-colg' %}" style="float: right;">
+                                {% csrf_token %}
+                                <input type="search" placeholder="Search" area-label="search" name="searched">
+                                <button class="btn btn-outline-secondary" type="submit"> Search College</button>
+                        </form>
+
+                        <center>
+                                {% if searched %}
+                                        <h1>you search {{searched}}</h1>
+                                {% for vanues in venue %}
+                                        
+                                        <a href="{% url 'compare_colg' vanues.id %}">{{vanues}}</a>
+
+                                {% endfor %}
+
+                                {% else %}
+                                        <h1>You Forgote to Search </h1>
+
+                                {% endif %}
+                        </center>
+                         <div class="" style="background-color: lightblue; border-style: solid;">
+                                 <img src="/media/{{ colg_data.college_image }}" style="width: 255px; height: 150px;" class="card-img-top" alt="..."><br><br>
+                                
+                                {{comp_colg_data.college_name}}<br>
+                                {{comp_colg_data.college_address}}<br>
+        
+                                {% for comp_colg_cors in comp_colg_id %}
+                                {{ comp_colg_cors.course}}
+                                {{comp_colg_cors.course.branch}}<br>
+                                {{comp_colg_cors.course.stream}}<br>
+                                {{comp_colg_cors.fee}}<br>
+                                {% endfor %}
+                                <div>
+                                {% block compare %}
+                                {% include 'html/compare.html' %}
+
+                                {% endblock compare %}
+</div>
+</div>
 
 {% endblock compare %}
 </body>
