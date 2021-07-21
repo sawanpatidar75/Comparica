@@ -24,10 +24,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = '@0bi%$=gmjx^nr46g@*7g1+^^^d=lel57a^)k5cl3nk!apxyq0'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
-# 'comparica.herokuapp.com', '127.0.0.1']
+ALLOWED_HOSTS = ['comparica.herokuapp.com', '127.0.0.1']
 
 
 # Application definition
